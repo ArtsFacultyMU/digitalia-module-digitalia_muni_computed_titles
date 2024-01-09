@@ -1,0 +1,3 @@
+services:
+  computed_titles:
+    class: '\Drupal\digitalia_muni_computed_titles\Service\ComputedTitles'

@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for digitalia_muni_computed_titles module.
+ *
+ * @DCG
+ * This file is no longer required in Drupal 8.
+ * @see https://www.drupal.org/node/2217931
+ */
+function digitalia_muni_computed_titles_preprocess_page_title(&$variables) {
+
+  $node_id = \Drupal::request()->attributes->get('node');
+
+  if(is_string($node_id)) {
+    $node = \Drupal\node\Entity\Node::load($node_id);
+  } else {
+    $node = $node_id;
+  }
+
+  if ($node) {
+    if ($node->getType() == 'author') {
+      $title = \Drupal::service('computed_titles')->getComputedTitle($node);  
+      $variables['title'] = $title;
+    }
+  }
+}
